@@ -71,7 +71,6 @@ int main()
 {
   system("cls");
   setlocale(LC_ALL, "portuguese");
-  printf("teste");
 
   no *fila1 = NULL;
   no *fila2 = NULL;
@@ -101,13 +100,27 @@ int main()
   while(difftime(atual, inicial) <= duration)
   {
     printf("\nTempo decorrido: %d", (int)difftime(atual, inicial));
+    printf("\n\nFila 1: ");
+    for (int i = 0; i < count1; i++)
+    {
+      printf(" ---###--- ");
+    }
+    printf("\n\nFila 2: ");
+    for (int i = 0; i < count2; i++)
+    {
+      printf(" ---###--- ");
+    }
+    printf("\n\nFila 3: ");
+    for (int i = 0; i < count3; i++)
+    {
+      printf(" ---###--- ");
+    }
     if((int)difftime(atual, inicial) % remov == 0 && (int)difftime(atual,inicial) != 0)
     {
       if (count1 > 0)
       {
         if ((int)difftime(atual, inicio1->criado) >= remov)
         {
-          printf("teste");
           deleta(&inicio1, &max, &min, &media_geral);
           count1--;
         }
