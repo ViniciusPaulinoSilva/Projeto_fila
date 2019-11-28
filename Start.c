@@ -3,6 +3,7 @@
 /                                                     /
 /   Nomes: Gabriel Yamamoto, Vinicius Silva           /
 /             RAs: 19241611, 18713529                 /
+/               Valor do projeto: 5                   /
 /                                                     /
 /*****************************************************/
 
