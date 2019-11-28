@@ -15,6 +15,7 @@
 #include <ctype.h>
 #include <locale.h>
 #include <windows.h>
+#include "tela.h"
 
 typedef struct fila no;
 
@@ -24,6 +25,15 @@ struct fila
   struct fila *prox;
 };
 
+void tempo(int *duration, int *remov, int *insert)
+{
+    printf("\n\nQuanto tempo irá durar a simulação? \n");
+    scanf("%d", &*duration);
+    printf("\n\nDe quanto será o intervalo para inserção? \n");
+    scanf("%d", &*insert);
+    printf("\n\nDe quanto será o intervalo para remoção? \n");
+    scanf("%d", &*remov);
+}
 void insere(no **inicio, no **fim)
 {
   time_t atual;
@@ -46,7 +56,7 @@ void insere(no **inicio, no **fim)
   novo->prox = NULL;
   (*fim)->prox = novo;
   (*fim) = novo;
-  //time(&fim -> criado);
+
 }
 
 void deleta(no **inicio, int *maximo, int *minimo, int *media_geral)
@@ -69,20 +79,19 @@ void deleta(no **inicio, int *maximo, int *minimo, int *media_geral)
 }
 int main()
 {
+  textbackground(ROSA_ESCURO);
+  textcolor(CINZA);
   system("cls");
   setlocale(LC_ALL, "portuguese");
-  printf("teste");
-
   no *fila1 = NULL;
   no *fila2 = NULL;
   no *fila3 = NULL;
-  int duration = 60;
-  int insert = 5;
-  int remov = 10;
+  int duration = 0;
+  int insert = 0;
+  int remov = 0;
   time_t atual;
   time(&atual);
   time_t inicial;
-  time(&inicial);
   no *inicio1 = fila1;
   no *fim1 = fila1;
   no *inicio2 = fila2;
@@ -96,18 +105,39 @@ int main()
   int count2 = 0;
   int count3 = 0;
   int countall = 0;
+  int a = 164;
 
+  tempo(&duration, &remov, &insert);
+  time(&inicial);
 
   while(difftime(atual, inicial) <= duration)
   {
-    printf("\nTempo decorrido: %d", (int)difftime(atual, inicial));
+    printf("\nTempo de simulação: %d", (int)difftime(atual, inicial));
+    textcolor(VERMELHO);
+    printf("\n\nFila 1: ");
+    for (int i = 0; i < count1; i++)
+    {
+      printf(" %c ", a);
+    }
+    textcolor(VERDE);
+    printf("\n\nFila 2: ");
+    for (int i = 0; i < count2; i++)
+    {
+      printf(" %c ", a);
+    }
+    textcolor(CIANO);
+    printf("\n\nFila 3: ");
+    for (int i = 0; i < count3; i++)
+    {
+      printf(" %c ", a);
+    }
+    textcolor(CINZA);
     if((int)difftime(atual, inicial) % remov == 0 && (int)difftime(atual,inicial) != 0)
     {
       if (count1 > 0)
       {
         if ((int)difftime(atual, inicio1->criado) >= remov)
         {
-          printf("teste");
           deleta(&inicio1, &max, &min, &media_geral);
           count1--;
         }
@@ -180,11 +210,15 @@ int main()
           countall++;
       }
     }
-    Sleep(1000);
+    Sleep(800);
     system("cls");
     time(&atual);
     // printa filas e tempo q o programa esta sendo executado
   }
-  printf("\n\ncount all: %d\n\nMÉDIA GERAL: %.2f\n\n", countall, (float)(media_geral / countall));
+  printf("\n\n Numero total de elementos: %d\n\n Tempo médio de espera: %.2f\n\n", countall, (float)(media_geral / countall));
   // printa tempos de espera
+  printf("\n\n Tempo mínimo de espera: %d \n\n Tempo máximo de espera %d \n\n", min, max);
 }
+
+
+
